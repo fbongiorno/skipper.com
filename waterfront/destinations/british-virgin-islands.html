@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>British Virgin Islands — Skipper Boating Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal:       #1E8A96;
+      --teal-dark:  #0D5F6B;
+      --teal-light: #5BBFCC;
+      --teal-pale:  #D6F0F3;
+      --coral:      #E07B5E;
+      --navy:       #0A1E30;
+      --navy-mid:   #132F47;
+      --white:      #FFFFFF;
+      --cream:      #F6F4F0;
+      --sand:       #EDE7DB;
+      --text:       #1A2B38;
+      --text-mid:   #4A6070;
+      --text-light: #7A95A8;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--white); color: var(--text); font-family: 'Open Sans', sans-serif; font-weight: 400; line-height: 1.7; overflow-x: hidden; }
+
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9000;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 24px 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background 0.4s, padding 0.4s, box-shadow 0.4s;
+    }
+    nav.scrolled { background: rgba(10,30,48,0.97); padding: 16px 60px; box-shadow: 0 2px 32px rgba(0,0,0,0.3); backdrop-filter: blur(12px); }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .brand-logo-crop { width: 170px; height: 110px; flex-shrink: 0; overflow: hidden; }
+    .brand-logo-crop img { width: 170px; height: 110px; display: block; }
+    .nav-links { display: flex; align-items: center; gap: 36px; }
+    .nav-links a { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta { color: var(--navy) !important; background: var(--white); padding: 10px 24px; border-radius: 2px; transition: background 0.2s, transform 0.2s !important; }
+    .nav-cta:hover { background: var(--teal-pale); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; height: 100vh; min-height: 680px;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+      overflow: hidden;
+    }
+    .hero-img { position: absolute; inset: 0; }
+    .hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.05); animation: heroZoom 12s ease-out forwards; }
+    @keyframes heroZoom { to { transform: scale(1); } }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,30,48,0.88) 0%, rgba(10,30,48,0.3) 50%, rgba(10,30,48,0.2) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 0 60px 80px;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .hero-breadcrumb {
+      font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal-light);
+      margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+      opacity: 0; animation: fadeUp 0.7s 0.2s forwards;
+    }
+    .hero-breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+    .hero-breadcrumb a:hover { color: var(--white); }
+    .hero-breadcrumb span { opacity: 0.4; }
+    .hero-headline {
+      font-family: 'Lora', serif; font-size: clamp(44px, 7vw, 90px);
+      font-weight: 600; font-style: italic; line-height: 1.02;
+      color: var(--white); margin-bottom: 20px;
+      opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
+    }
+    .hero-meta {
+      display: flex; align-items: center; gap: 28px; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.8s 0.6s forwards;
+    }
+    .hero-meta-item { display: flex; align-items: center; gap: 8px; }
+    .hero-meta-item svg { width: 14px; height: 14px; opacity: 0.6; }
+    .hero-meta-item span { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; color: rgba(255,255,255,0.7); }
+    .hero-meta-sep { width: 1px; height: 16px; background: rgba(255,255,255,0.2); }
+    .hero-scroll {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
+      opacity: 0; animation: fadeIn 1s 1.2s forwards;
+    }
+    .hero-scroll span { font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+    .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+    @keyframes scrollPulse { 0%,100% { opacity: 0.4; transform: scaleY(1); } 50% { opacity: 1; transform: scaleY(0.6); } }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } from { opacity: 0; transform: translateY(20px); } }
+    @keyframes fadeIn { to { opacity: 1; } }
+
+    /* ── QUICK FACTS BAR ── */
+    .facts-bar {
+      background: var(--navy);
+      display: grid; grid-template-columns: repeat(6, 1fr);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .fact {
+      padding: 28px 20px; text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+    .fact:last-child { border-right: none; }
+    .fact-icon { font-size: 18px; margin-bottom: 8px; }
+    .fact-value { font-family: 'Lora', serif; font-size: 22px; font-weight: 600; color: var(--white); line-height: 1; margin-bottom: 4px; }
+    .fact-value span { color: var(--teal-light); }
+    .fact-label { font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+
+    /* ── SHARED ── */
+    .section-label { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; display: block; }
+    .section-title { font-family: 'Lora', serif; font-size: clamp(30px, 4vw, 50px); font-weight: 600; line-height: 1.15; color: var(--navy); }
+    .section-title.light { color: var(--white); }
+    .section-body { font-size: 16px; font-weight: 300; color: var(--text-mid); line-height: 1.85; }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+    .reveal.in { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ── INTRO ── */
+    .intro { padding: 100px 60px; background: var(--white); display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .intro-text {}
+    .intro-text .section-body { margin-top: 24px; max-width: 480px; }
+    .intro-text .section-body + .section-body { margin-top: 16px; }
+    .intro-image { position: relative; }
+    .intro-image img { width: 100%; height: 480px; object-fit: cover; border-radius: 3px; display: block; }
+    .intro-image-caption {
+      position: absolute; bottom: -1px; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(10,30,48,0.85), transparent);
+      padding: 32px 24px 20px;
+      border-radius: 0 0 3px 3px;
+    }
+    .caption-text { font-family: 'Lora', serif; font-size: 13px; font-style: italic; color: rgba(255,255,255,0.8); }
+    .intro-pull {
+      grid-column: 1 / -1;
+      border-top: 1px solid var(--sand);
+      border-bottom: 1px solid var(--sand);
+      padding: 36px 0;
+      margin-top: 20px;
+    }
+    .pull-quote { font-family: 'Lora', serif; font-size: clamp(20px, 2.5vw, 28px); font-style: italic; font-weight: 500; color: var(--navy); line-height: 1.5; text-align: center; }
+    .pull-quote span { color: var(--teal); }
+
+    /* ── DESTINATIONS GRID ── */
+    .destinations { padding: 100px 60px; background: var(--cream); }
+    .dest-header { margin-bottom: 56px; }
+    .dest-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .dest-card { position: relative; overflow: hidden; cursor: pointer; }
+    .dest-card:first-child { grid-column: 1 / 3; }
+    .dest-card-img { position: relative; }
+    .dest-card:first-child .dest-card-img { height: 480px; }
+    .dest-card:not(:first-child) .dest-card-img { height: 340px; }
+    .dest-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.7s cubic-bezier(0.22,1,0.36,1), filter 0.4s; filter: brightness(0.85); }
+    .dest-card:hover img { transform: scale(1.04); filter: brightness(0.65); }
+    .dest-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,30,48,0.85) 0%, transparent 55%); }
+    .dest-card-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px; }
+    .dest-card-num { font-family: 'Lora', serif; font-size: 48px; font-weight: 700; color: rgba(255,255,255,0.07); line-height: 1; margin-bottom: -8px; }
+    .dest-card-tag { font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal-light); margin-bottom: 6px; }
+    .dest-card-name { font-family: 'Lora', serif; font-size: 22px; font-weight: 600; color: var(--white); margin-bottom: 6px; }
+    .dest-card:first-child .dest-card-name { font-size: 30px; }
+    .dest-card-desc { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.65); line-height: 1.55; max-height: 0; overflow: hidden; transition: max-height 0.4s; }
+    .dest-card:hover .dest-card-desc { max-height: 80px; }
+    /* Image caption bar */
+    .dest-caption-bar {
+      background: rgba(10,30,48,0.95); padding: 10px 16px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .dest-caption-bar svg { width: 12px; height: 12px; opacity: 0.5; flex-shrink: 0; }
+    .dest-caption-bar span { font-family: 'Lora', serif; font-size: 11px; font-style: italic; color: rgba(255,255,255,0.55); }
+
+    /* ── ITINERARY ── */
+    .itinerary { padding: 100px 0; background: var(--navy); }
+    .itinerary-inner { max-width: 1100px; margin: 0 auto; padding: 0 60px; }
+    .itinerary-header { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; margin-bottom: 72px; }
+    .itinerary-header .section-body.light { margin-top: 16px; }
+    .itin-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.05); border-radius: 3px; overflow: hidden; }
+    .itin-day {
+      background: rgba(255,255,255,0.02);
+      padding: 24px 18px;
+      position: relative;
+      transition: background 0.3s;
+    }
+    .itin-day:hover { background: rgba(30,138,150,0.12); }
+    .itin-day-num {
+      font-family: 'Lora', serif; font-size: 36px; font-weight: 700;
+      color: rgba(255,255,255,0.06); line-height: 1; margin-bottom: 12px;
+    }
+    .itin-day-label { font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal-light); margin-bottom: 8px; }
+    .itin-day-title { font-family: 'Lora', serif; font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 8px; line-height: 1.3; }
+    .itin-day-detail { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.55; }
+    .itin-day-sail { margin-top: 12px; display: flex; align-items: center; gap: 5px; }
+    .itin-day-sail svg { width: 10px; height: 10px; color: var(--teal-light); }
+    .itin-day-sail span { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 600; color: var(--teal-light); letter-spacing: 0.05em; }
+
+    /* ── SAILOR'S GUIDE ── */
+    .guide { padding: 100px 60px; background: var(--white); }
+    .guide-header { text-align: center; max-width: 560px; margin: 0 auto 64px; }
+    .guide-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .guide-card {
+      border: 1px solid var(--sand);
+      border-radius: 3px;
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .guide-card:hover { box-shadow: 0 16px 48px rgba(10,30,48,0.08); transform: translateY(-4px); }
+    .guide-card-accent {
+      position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+      background: linear-gradient(to bottom, var(--teal), var(--teal-dark));
+    }
+    .guide-card-icon { width: 44px; height: 44px; background: var(--teal-pale); border-radius: 2px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+    .guide-card-icon svg { width: 22px; height: 22px; color: var(--teal); }
+    .guide-card-title { font-family: 'Lora', serif; font-size: 22px; font-weight: 600; color: var(--navy); margin-bottom: 16px; }
+    .guide-card-body { font-size: 14px; font-weight: 300; color: var(--text-mid); line-height: 1.75; }
+    .guide-card-body strong { font-weight: 600; color: var(--text); }
+    .guide-list { list-style: none; margin-top: 12px; }
+    .guide-list li { display: flex; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--cream); font-size: 13px; color: var(--text-mid); }
+    .guide-list li:last-child { border-bottom: none; }
+    .guide-list li::before { content: '—'; color: var(--teal); font-weight: 600; flex-shrink: 0; }
+
+    /* ── GALLERY ── */
+    .gallery { padding: 100px 60px; background: var(--navy); }
+    .gallery-header { text-align: center; margin-bottom: 56px; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto;
+      gap: 3px;
+    }
+    .gallery-item { position: relative; overflow: hidden; cursor: zoom-in; }
+    .gallery-item:nth-child(1) { grid-column: 1 / 3; grid-row: 1; }
+    .gallery-item:nth-child(4) { grid-column: 4; grid-row: 1 / 3; }
+    .gallery-item:nth-child(6) { grid-column: 2 / 4; grid-row: 2; }
+    .gallery-item img {
+      width: 100%; height: 100%; min-height: 240px;
+      object-fit: cover; display: block;
+      filter: brightness(0.78) saturate(0.9);
+      transition: filter 0.4s, transform 0.6s cubic-bezier(0.22,1,0.36,1);
+    }
+    .gallery-item:hover img { filter: brightness(0.55) saturate(1.1); transform: scale(1.04); }
+    .gallery-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 40px 18px 16px;
+      background: linear-gradient(to top, rgba(10,30,48,0.9), transparent);
+      transform: translateY(4px); opacity: 0;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .gallery-item:hover .gallery-caption { opacity: 1; transform: none; }
+    .gallery-caption-location { font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal-light); margin-bottom: 4px; }
+    .gallery-caption-text { font-family: 'Lora', serif; font-size: 13px; font-style: italic; color: rgba(255,255,255,0.85); line-height: 1.4; }
+
+    /* Static captions always visible */
+    .gallery-caption-static {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 28px 16px 14px;
+      background: linear-gradient(to top, rgba(10,30,48,0.8), transparent);
+    }
+    .gallery-caption-static .gallery-caption-location { display: block; }
+    .gallery-caption-static .gallery-caption-text { display: block; }
+
+    /* ── PRACTICAL INFO ── */
+    .practical { padding: 100px 60px; background: var(--sand); }
+    .practical-inner { max-width: 900px; margin: 0 auto; }
+    .practical-header { margin-bottom: 48px; }
+    .info-table { width: 100%; border-collapse: collapse; }
+    .info-table tr { border-bottom: 1px solid rgba(10,30,48,0.08); }
+    .info-table tr:last-child { border-bottom: none; }
+    .info-table td { padding: 18px 0; vertical-align: top; }
+    .info-table td:first-child {
+      font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal);
+      width: 200px; padding-right: 40px;
+    }
+    .info-table td:last-child { font-size: 14px; font-weight: 400; color: var(--text); line-height: 1.65; }
+    .info-table td:last-child strong { font-weight: 600; }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: 120px 60px; text-align: center;
+      background: linear-gradient(135deg, var(--teal-dark) 0%, var(--teal) 50%, #167882 100%);
+      position: relative; overflow: hidden;
+    }
+    .cta-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(255,255,255,0.06), transparent); }
+    .cta-content { position: relative; z-index: 1; max-width: 580px; margin: 0 auto; }
+    .cta-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 20px; }
+    .cta-title { font-family: 'Lora', serif; font-size: clamp(32px, 5vw, 52px); font-weight: 600; font-style: italic; color: var(--white); line-height: 1.1; margin-bottom: 18px; }
+    .cta-sub { font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.7); margin-bottom: 44px; }
+    .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      background: var(--white); color: var(--navy);
+      padding: 16px 36px; border-radius: 2px; text-decoration: none;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); background: var(--teal-pale); }
+    .btn-outline {
+      font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      border: 1.5px solid rgba(255,255,255,0.4); color: var(--white);
+      padding: 16px 36px; border-radius: 2px; text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); padding: 64px 60px 36px; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 48px; }
+    .footer-logo-wrap { display: flex; align-items: center; margin-bottom: 18px; }
+    .footer-brand-logo-crop { width: 170px; height: 110px; overflow: hidden; }
+    .footer-brand-logo-crop img { width: 170px; height: 110px; display: block; }
+    .footer-tagline { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.4); line-height: 1.7; max-width: 260px; }
+    .footer-col-title { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 18px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 9px; }
+    .footer-col ul li a { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--white); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.28); }
+    .footer-legal { display: flex; gap: 24px; }
+    .footer-legal a { font-size: 12px; color: rgba(255,255,255,0.28); text-decoration: none; transition: color 0.2s; }
+    .footer-legal a:hover { color: rgba(255,255,255,0.6); }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="../../" class="nav-logo">
+      <div class="brand-logo-crop"></div>
+    </a>
+    <div class="nav-links">
+      <a href="../../">Destinations</a>
+      <a href="../../">Experiences</a>
+      <a href="../../">Rent a Boat</a>
+      <a href="../../">Guides</a>
+      <a href="../../" class="nav-cta">Plan a Trip</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1500514966906-fe245eea9344?w=1600&q=85&fit=crop" alt="British Virgin Islands">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-scroll">
+      <span>Explore</span>
+      <div class="scroll-line"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-breadcrumb">
+        <a href="../../">Skipper</a>
+        <span>/</span>
+        <a href="../../">Destinations</a>
+        <span>/</span>
+        British Virgin Islands
+      </div>
+      <h1 class="hero-headline">British Virgin<br>Islands</h1>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <svg viewBox="0 0 14 14" fill="none"><path d="M7 1.5C4.52 1.5 2.5 3.52 2.5 6c0 3.38 4.5 6.5 4.5 6.5S11.5 9.38 11.5 6c0-2.48-2.02-4.5-4.5-4.5zm0 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" fill="rgba(255,255,255,0.6)"/></svg>
+          <span>UK Overseas Territory · Caribbean Sea</span>
+        </div>
+        <div class="hero-meta-sep"></div>
+        <div class="hero-meta-item">
+          <svg viewBox="0 0 14 14" fill="none"><path d="M7 1L8.5 5.5H13L9.25 8.25 10.5 13 7 10.25 3.5 13l1.25-4.75L1 5.5h4.5z" fill="rgba(255,255,255,0.6)"/></svg>
+          <span>World-Class Sailing</span>
+        </div>
+        <div class="hero-meta-sep"></div>
+        <div class="hero-meta-item">
+          <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="rgba(255,255,255,0.6)" stroke-width="1.2"/><path d="M7 4v3.5l2 1.5" stroke="rgba(255,255,255,0.6)" stroke-width="1.2" stroke-linecap="round"/></svg>
+          <span>Best: Dec — Jun</span>
+        </div>
+        <div class="hero-meta-sep"></div>
+        <div class="hero-meta-item">
+          <svg viewBox="0 0 14 14" fill="none"><path d="M2 4h10M4 2v2M10 2v2M2 7h10M2 10h7" stroke="rgba(255,255,255,0.6)" stroke-width="1.2" stroke-linecap="round"/></svg>
+          <span>60+ Islands &amp; Cays</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK FACTS -->
+  <div class="facts-bar">
+    <div class="fact">
+      <div class="fact-icon">🏝️</div>
+      <div class="fact-value">60<span>+</span></div>
+      <div class="fact-label">Islands &amp; Cays</div>
+    </div>
+    <div class="fact">
+      <div class="fact-icon">🌡️</div>
+      <div class="fact-value">28<span>°C</span></div>
+      <div class="fact-label">Avg Water Temp</div>
+    </div>
+    <div class="fact">
+      <div class="fact-icon">💨</div>
+      <div class="fact-value">15–25<span>kn</span></div>
+      <div class="fact-label">Trade Wind Speed</div>
+    </div>
+    <div class="fact">
+      <div class="fact-icon">⛵</div>
+      <div class="fact-value">ENE<span>/ESE</span></div>
+      <div class="fact-label">Prevailing Winds</div>
+    </div>
+    <div class="fact">
+      <div class="fact-icon">💵</div>
+      <div class="fact-value">USD</div>
+      <div class="fact-label">Currency</div>
+    </div>
+    <div class="fact">
+      <div class="fact-icon">🗺️</div>
+      <div class="fact-value">153<span>km²</span></div>
+      <div class="fact-label">Total Land Area</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <section class="intro">
+    <div class="intro-text reveal">
+      <span class="section-label">The Sailing Capital of the World</span>
+      <h2 class="section-title">Where Trade Winds<br>Meet Turquoise Seas</h2>
+      <p class="section-body">The British Virgin Islands are widely considered the finest sailing destination on the planet. Steady northeast trade winds, protected channels between closely spaced islands, crystal-clear anchorages, and a relaxed maritime culture make the BVI an experience unlike anywhere else on earth.</p>
+      <p class="section-body">With over 60 islands, cays, and rocks strung across just 50 nautical miles, you're never more than a short sail from the next hidden bay. The passages are benign, the weather predictable, and the welcome warm. Whether you're an experienced bluewater sailor or stepping aboard for the first time, the BVI rewards.</p>
+    </div>
+    <div class="intro-image reveal reveal-delay-2">
+      <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80&fit=crop" alt="Sailing in the BVI">
+      <div class="intro-image-caption">
+        <p class="caption-text">A classic sloop reaching downwind through the Sir Francis Drake Channel, with Tortola's peaks in the distance</p>
+      </div>
+    </div>
+    <div class="intro-pull reveal">
+      <p class="pull-quote">"The BVI is the perfect sailing destination — <span>short passages, constant breeze, spectacular anchorages</span>, and a cold Painkiller waiting at every beach bar."</p>
+    </div>
+  </section>
+
+  <!-- TOP DESTINATIONS -->
+  <section class="destinations">
+    <div class="dest-header reveal">
+      <span class="section-label">Top Destinations</span>
+      <h2 class="section-title">Six Unmissable Stops</h2>
+    </div>
+    <div class="dest-grid reveal reveal-delay-1">
+
+      <!-- 1 The Baths -->
+      <div class="dest-card">
+        <div class="dest-card-img">
+          <img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=900&q=80&fit=crop" alt="The Baths Virgin Gorda">
+          <div class="dest-card-overlay"></div>
+          <div class="dest-card-content">
+            <div class="dest-card-num">01</div>
+            <div class="dest-card-tag">Virgin Gorda</div>
+            <h3 class="dest-card-name">The Baths</h3>
+            <p class="dest-card-desc">Enormous granite boulders forming cathedral-like sea grottoes and tidal pools. The most iconic anchorage in the entire Caribbean — arrive before 9am to beat the day-charter crowds.</p>
+          </div>
+        </div>
+        <div class="dest-caption-bar">
+          <svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="rgba(255,255,255,0.5)" stroke-width="1"/><path d="M6 3v4M6 8.5v.5" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round"/></svg>
+          <span>National Park mooring balls available · Dinghy ashore · 0.5mi trail to Devils Bay</span>
+        </div>
+      </div>
+
+      <!-- 2 White Bay -->
+      <div class="dest-card">
+        <div class="dest-card-img">
+          <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=600&q=80&fit=crop" alt="White Bay Jost Van Dyke">
+          <div class="dest-card-overlay"></div>
+          <div class="dest-card-content">
+            <div class="dest-card-num">02</div>
+            <div class="dest-card-tag">Jost Van Dyke</div>
+            <h3 class="dest-card-name">White Bay</h3>
+            <p class="dest-card-desc">Home of the legendary Soggy Dollar Bar and the original Painkiller cocktail. A curving white-sand beach with a laid-back atmosphere and local population of just 300.</p>
+          </div>
+        </div>
+        <div class="dest-caption-bar">
+          <svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="rgba(255,255,255,0.5)" stroke-width="1"/><path d="M6 3v4M6 8.5v.5" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round"/></svg>
+          <span>Anchor or mooring ball · Customs at Great Harbour · Swim ashore</span>
+        </div>
+      </div>
+
+      <!-- 3 Norman Island -->
+      <div class="dest-card">
+        <div class="dest-card-img">
+          <img src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=600&q=80&fit=crop" alt="Norman Island BVI">
+          <div class="dest-card-overlay"></div>
+          <div class="dest-card-content">
+            <div class="dest-card-num">03</div>
+            <div class="dest-card-tag">Norman Island</div>
+            <h3 class="dest-card-name">The Bight</h3>
+            <p class="dest-card-desc">Said to have inspired Robert Louis Stevenson's Treasure Island. The Bight offers the BVI's best-protected anchorage. William T's floating bar is a beloved institution.</p>
+          </div>
+        </div>
+        <div class="dest-caption-bar">
+          <svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="rgba(255,255,255,0.5)" stroke-width="1"/><path d="M6 3v4M6 8.5v.5" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round"/></svg>
+          <span>Well-protected · Sea Caves 0.5nm NE · Excellent snorkeling at The Indians</span>
+        </div>
+      </div>
+
+      <!-- 4 Cane Garden Bay -->
+      <div class="dest-card">
+        <div class="dest-card-img">
+          <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80&fit=crop" alt="Cane Garden Bay Tortola">
+          <div class="dest-card-overlay"></div>
+          <div class="dest-card-content">
+            <div class="dest-card-num">04</div>
+            <div class="dest-card-tag">Tortola</div>
+            <h3 class="dest-card-name">Cane Garden Bay</h3>
+            <p class="dest-card-desc">Tortola's most celebrated beach. A wide crescent of golden sand lined with beach bars and Quito's — the island's beloved live music venue. Best visited in calm weather.</p>
+          </div>
+        </div>
+        <div class="dest-caption-bar">
+          <svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="rgba(255,255,255,0.5)" stroke-width="1"/><path d="M6 3v4M6 8.5v.5" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round"/></svg>
+          <span>Shallow approach — check draft · Anchor in 10–20ft · Avoid in N swells</span>
+        </div>
+      </div>
+
+      <!-- 5 Anegada -->
+      <div class="dest-card">
+        <div class="dest-card-img">
+          <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600&q=80&fit=crop" alt="Anegada BVI">
+          <div class="dest-card-overlay"></div>
+          <div class="dest-card-content">
+            <div class="dest-card-num">05</div>
+            <div class="dest-card-tag">Anegada</div>
+            <h3 class="dest-card-name">Anegada</h3>
+            <p class="dest-card-desc">The BVI's only coral island — flat, remote and utterly wild. Famous for fresh-caught lobster, a flamingo colony, pristine beaches stretching for miles, and precise navigation requirements.</p>
+          </div>
+        </div>
+        <div class="dest-caption-bar">
+          <svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="rgba(255,255,255,0.5)" stroke-width="1"/><path d="M6 3v4M6 8.5v.5" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round"/></svg>
+          <span>GPS essential · Reef approach — follow waypoints exactly · 14nm N of Tortola</span>
+        </div>
+      </div>
+
+      <!-- 6 Cooper Island -->
+      <div class="dest-card">
+        <div class="dest-card-img">
+          <img src="https://images.unsplash.com/photo-1528154291023-a6525fabe5b4?w=600&q=80&fit=crop" alt="Cooper Island BVI">
+          <div class="dest-card-overlay"></div>
+          <div class="dest-card-content">
+            <div class="dest-card-num">06</div>
+            <div class="dest-card-tag">Cooper Island</div>
+            <h3 class="dest-card-name">Cooper Island</h3>
+            <p class="dest-card-desc">A low-key eco resort with an excellent beach bar, rum bar, and dive shop. Superb coral reef snorkeling directly off the mooring field. Arrive early — mooring balls fill by noon.</p>
+          </div>
+        </div>
+        <div class="dest-caption-bar">
+          <svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="rgba(255,255,255,0.5)" stroke-width="1"/><path d="M6 3v4M6 8.5v.5" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round"/></svg>
+          <span>Mooring balls only · Reserve ahead · Excellent reef off bow</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ITINERARY -->
+  <section class="itinerary">
+    <div class="itinerary-inner">
+      <div class="itinerary-header">
+        <div class="reveal">
+          <span class="section-label" style="color:var(--teal-light)">Sample Route</span>
+          <h2 class="section-title light">The Classic BVI<br>7-Day Circuit</h2>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <p class="section-body light">Starting and ending from Road Town or Nanny Cay marina, Tortola. Covers the best of the main island group plus an optional run to Anegada. Suitable for moderate sailing experience.</p>
+        </div>
+      </div>
+      <div class="itin-days reveal reveal-delay-1">
+        <div class="itin-day">
+          <div class="itin-day-num">1</div>
+          <div class="itin-day-label">Tortola → Norman Is.</div>
+          <div class="itin-day-title">The Bight &amp; The Caves</div>
+          <div class="itin-day-detail">Depart Road Town heading SE. Easy 2hr reach in the trades. Snorkel the sea caves at Norman Island, then anchor at The Bight.</div>
+          <div class="itin-day-sail">
+            <svg viewBox="0 0 10 10" fill="none"><path d="M5 1L8 5H5.5V9H4.5V5H2L5 1z" fill="#5BBFCC"/></svg>
+            <span>~10nm · 2h</span>
+          </div>
+        </div>
+        <div class="itin-day">
+          <div class="itin-day-num">2</div>
+          <div class="itin-day-label">Norman → Cooper Is.</div>
+          <div class="itin-day-title">The Indians &amp; Cooper Island</div>
+          <div class="itin-day-detail">Morning snorkel at The Indians. Sail NE to Cooper Island for the afternoon. Beach bar lunch and coral reef dive.</div>
+          <div class="itin-day-sail">
+            <svg viewBox="0 0 10 10" fill="none"><path d="M5 1L8 5H5.5V9H4.5V5H2L5 1z" fill="#5BBFCC"/></svg>
+            <span>~6nm · 1.5h</span>
+          </div>
+        </div>
+        <div class="itin-day">
+          <div class="itin-day-num">3</div>
+          <div class="itin-day-label">Cooper → Virgin Gorda</div>
+          <div class="itin-day-title">The Baths</div>
+          <div class="itin-day-detail">Early start east to Virgin Gorda. Secure a mooring at The Baths by 8am. Afternoon at North Sound — the BVI's finest sailing lagoon.</div>
+          <div class="itin-day-sail">
+            <svg viewBox="0 0 10 10" fill="none"><path d="M5 1L8 5H5.5V9H4.5V5H2L5 1z" fill="#5BBFCC"/></svg>
+            <span>~9nm · 2h</span>
+          </div>
+        </div>
+        <div class="itin-day">
+          <div class="itin-day-num">4</div>
+          <div class="itin-day-label">Virgin Gorda → Anegada</div>
+          <div class="itin-day-title">Anegada Lobster Run</div>
+          <div class="itin-day-detail">Optional: 14nm north in open water. Follow GPS waypoints exactly for the reef approach. Reserve lobster dinner at Wonky Dog or Potter's.</div>
+          <div class="itin-day-sail">
+            <svg viewBox="0 0 10 10" fill="none"><path d="M5 1L8 5H5.5V9H4.5V5H2L5 1z" fill="#5BBFCC"/></svg>
+            <span>~14nm · 2.5h</span>
+          </div>
+        </div>
+        <div class="itin-day">
+          <div class="itin-day-num">5</div>
+          <div class="itin-day-label">Anegada → Jost Van Dyke</div>
+          <div class="itin-day-title">Great Harbour, JVD</div>
+          <div class="itin-day-detail">Long but rewarding passage west. Customs clearance at Great Harbour. Foxy's Tamarind Bar has been the soul of JVD since 1968.</div>
+          <div class="itin-day-sail">
+            <svg viewBox="0 0 10 10" fill="none"><path d="M5 1L8 5H5.5V9H4.5V5H2L5 1z" fill="#5BBFCC"/></svg>
+            <span>~22nm · 4h</span>
+          </div>
+        </div>
+        <div class="itin-day">
+          <div class="itin-day-num">6</div>
+          <div class="itin-day-label">JVD · White Bay</div>
+          <div class="itin-day-title">Soggy Dollar Day</div>
+          <div class="itin-day-detail">Spend the full day at White Bay. Swim ashore to the Soggy Dollar Bar. A Painkiller cocktail is compulsory. Sandy Spit (Little Jost) is 30 min east.</div>
+          <div class="itin-day-sail">
+            <svg viewBox="0 0 10 10" fill="none"><path d="M5 1L8 5H5.5V9H4.5V5H2L5 1z" fill="#5BBFCC"/></svg>
+            <span>Day at anchor</span>
+          </div>
+        </div>
+        <div class="itin-day">
+          <div class="itin-day-num">7</div>
+          <div class="itin-day-label">JVD → Tortola</div>
+          <div class="itin-day-title">Cane Garden Bay &amp; Home</div>
+          <div class="itin-day-detail">Final morning at Cane Garden Bay, Tortola. Quito's for a last lunch. Return to base marina in Road Town by late afternoon.</div>
+          <div class="itin-day-sail">
+            <svg viewBox="0 0 10 10" fill="none"><path d="M5 1L8 5H5.5V9H4.5V5H2L5 1z" fill="#5BBFCC"/></svg>
+            <span>~12nm · 2.5h</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAILOR'S GUIDE -->
+  <section class="guide">
+    <div class="guide-header reveal">
+      <span class="section-label">Essential Knowledge</span>
+      <h2 class="section-title">The Sailor's BVI Guide</h2>
+      <p class="section-body" style="margin-top:14px;">Everything you need to know before you cast off the dock lines in Road Town.</p>
+    </div>
+    <div class="guide-grid">
+
+      <div class="guide-card reveal reveal-delay-1">
+        <div class="guide-card-accent"></div>
+        <div class="guide-card-icon">
+          <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 2L13 8H19L14.5 12L16.5 18L11 14.5L5.5 18L7.5 12L3 8H9L11 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="guide-card-title">Navigation &amp; Charts</h3>
+        <p class="guide-card-body">The BVI uses <strong>NOAA chart 25641</strong> as the primary reference. All anchorages are charted, but use GPS and visual confirmation — especially approaching Anegada's reef. Most cruising apps (Navionics, iNavX, Aqua Map) carry detailed BVI coverage.</p>
+        <ul class="guide-list">
+          <li>Monitor VHF Channel 16 at all times</li>
+          <li>Working channels: 68, 69, 71, 78A</li>
+          <li>Sir Francis Drake Channel is the main highway</li>
+          <li>No anchoring on coral — use National Park Trust mooring balls</li>
+          <li>Mooring ball fee: ~$25–30 USD per night (pay the ranger)</li>
+        </ul>
+      </div>
+
+      <div class="guide-card reveal reveal-delay-2">
+        <div class="guide-card-accent"></div>
+        <div class="guide-card-icon">
+          <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="4" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M7 4V2M15 4V2M2 9H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="guide-card-title">Customs &amp; Clearance</h3>
+        <p class="guide-card-body">All foreign-flagged vessels must clear customs on arrival. The BVI uses the <strong>CBSA online system</strong> (eSeaClear) — complete your crew list and vessel details before entering BVI waters.</p>
+        <ul class="guide-list">
+          <li>Clearance ports: Road Town (Tortola), Great Harbour (JVD), Spanish Town (VG)</li>
+          <li>US Virgin Islands → BVI: clear in at first BVI port of call</li>
+          <li>Cruising permit required for stays over 24h</li>
+          <li>Keep ship's papers, passports and proof of ownership accessible</li>
+          <li>Clearance hours: 8:30am–4:30pm (Mon–Fri); overtime fees apply weekends</li>
+        </ul>
+      </div>
+
+      <div class="guide-card reveal reveal-delay-3">
+        <div class="guide-card-accent"></div>
+        <div class="guide-card-icon">
+          <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 3C7.7 3 5 5.7 5 9c0 5.25 6 10 6 10s6-4.75 6-10c0-3.3-2.7-6-6-6z" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="11" cy="9" r="2.5" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <h3 class="guide-card-title">Weather &amp; Season</h3>
+        <p class="guide-card-body">The BVI sits firmly in the <strong>trade wind belt</strong>. From December through June expect reliable ENE winds of 15–25 knots — ideal beam-reaching between islands. Summers bring lighter, more variable winds.</p>
+        <ul class="guide-list">
+          <li>Peak season: December–April (settled, consistent trades)</li>
+          <li>Shoulder season: May–June &amp; November (fewer boats, good winds)</li>
+          <li>Hurricane season: June–November (avoid August–October)</li>
+          <li>Water temp: 26–29°C year round</li>
+          <li>VHF weather: NOAA WX1–WX3 and Caribbean Weather Centre</li>
+        </ul>
+      </div>
+
+      <div class="guide-card reveal reveal-delay-4">
+        <div class="guide-card-accent"></div>
+        <div class="guide-card-icon">
+          <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 6h14M4 10h14M4 14h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="guide-card-title">Provisioning &amp; Marinas</h3>
+        <p class="guide-card-body">Road Town on Tortola is the charter hub and best provisioning stop. <strong>Nanny Cay Marina</strong> and <strong>Village Cay Marina</strong> both offer full services, fuel docks, and chandleries. Replenish before heading to outer islands.</p>
+        <ul class="guide-list">
+          <li>Nanny Cay: full haul-out, fuel, chandlery, restaurant, Wi-Fi</li>
+          <li>Village Cay: central Road Town location, dockage &amp; provisions</li>
+          <li>Leverick Bay (Virgin Gorda): fuel, provisions, good restaurant</li>
+          <li>Anegada Settlement: limited provisions — stock up on Tortola</li>
+          <li>Diesel: ~$4.50–5.50/gallon USD at most fuel docks</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery">
+    <div class="gallery-header reveal">
+      <span class="section-label" style="color:var(--teal-light)">In Pictures</span>
+      <h2 class="section-title light">The BVI Through the Lens</h2>
+    </div>
+    <div class="gallery-grid reveal reveal-delay-1">
+
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80&fit=crop" alt="BVI turquoise water">
+        <div class="gallery-caption-static">
+          <div class="gallery-caption-location">The Sir Francis Drake Channel</div>
+          <div class="gallery-caption-text">The BVI's main sailing highway — turquoise water between Tortola and the outer cays</div>
+        </div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-location">The Sir Francis Drake Channel</div>
+          <div class="gallery-caption-text">The BVI's main sailing highway — turquoise water between Tortola and the outer cays</div>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=600&q=80&fit=crop" alt="Sailing BVI">
+        <div class="gallery-caption">
+          <div class="gallery-caption-location">Open Water</div>
+          <div class="gallery-caption-text">Running downwind towards Norman Island under a full press of canvas</div>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1504150558240-0b4fd8946624?w=600&q=80&fit=crop" alt="Coastal view BVI">
+        <div class="gallery-caption">
+          <div class="gallery-caption-location">Tortola Coastline</div>
+          <div class="gallery-caption-text">Verdant volcanic peaks drop sharply to the sea along Tortola's northern shore</div>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1566438480900-0609be27a4be?w=600&q=80&fit=crop" alt="Underwater BVI reef">
+        <div class="gallery-caption-static">
+          <div class="gallery-caption-location">The Caves, Norman Island</div>
+          <div class="gallery-caption-text">Sea caves riddled with colourful reef fish and the occasional hawksbill turtle</div>
+        </div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-location">The Caves, Norman Island</div>
+          <div class="gallery-caption-text">Sea caves riddled with colourful reef fish and the occasional hawksbill turtle</div>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1512646816632-da69f75ebfd1?w=600&q=80&fit=crop" alt="Beach White Bay">
+        <div class="gallery-caption">
+          <div class="gallery-caption-location">White Bay, Jost Van Dyke</div>
+          <div class="gallery-caption-text">The powder-white sand and impossibly clear water of the BVI's most famous beach</div>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80&fit=crop" alt="Sailing sunset">
+        <div class="gallery-caption-static">
+          <div class="gallery-caption-location">Evening Passage</div>
+          <div class="gallery-caption-text">The golden hour light that makes every BVI sundowner worth the sail</div>
+        </div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-location">Evening Passage</div>
+          <div class="gallery-caption-text">The golden hour light that makes every BVI sundowner worth the sail</div>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?w=600&q=80&fit=crop" alt="Sailboat anchored">
+        <div class="gallery-caption">
+          <div class="gallery-caption-location">The Bight Anchorage</div>
+          <div class="gallery-caption-text">Dozens of yachts swing peacefully in The Bight's well-protected waters at Norman Island</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRACTICAL INFO -->
+  <section class="practical">
+    <div class="practical-inner">
+      <div class="practical-header reveal">
+        <span class="section-label">At a Glance</span>
+        <h2 class="section-title">Practical Information</h2>
+      </div>
+      <table class="info-table reveal reveal-delay-1">
+        <tr><td>Territory</td><td>British Virgin Islands — UK Overseas Territory. No BVI citizenship required for visitors. Warm, English-speaking welcome.</td></tr>
+        <tr><td>Currency</td><td><strong>US Dollar (USD)</strong>. ATMs available in Road Town. Most marinas and restaurants accept major credit cards. Carry cash for mooring ball fees and beach bars.</td></tr>
+        <tr><td>Language</td><td>English. No language barrier for English-speaking sailors.</td></tr>
+        <tr><td>Charter Bases</td><td>Road Town (Nanny Cay, Village Cay, Wickhams Cay II), Hodges Creek Marina. All major charter companies operate here: Moorings, Sunsail, Dream Yacht, Footloose.</td></tr>
+        <tr><td>Documents Required</td><td>Valid passport for all crew. Ship's registration papers. Proof of insurance. Crew list (minimum 2 copies for customs). Certificate of competency (bareboat charters may require RYA or USCG qualification).</td></tr>
+        <tr><td>Emergency Contacts</td><td>BVI Coast Guard: VHF Ch 16 or +1 (284) 494-3999. VISAR (Virgin Islands Search and Rescue): +1 (284) 499-0911 or VHF Ch 16. US Coast Guard San Juan: Ch 16.</td></tr>
+        <tr><td>Time Zone</td><td>Atlantic Standard Time (AST) — UTC-4. No daylight saving time observed.</td></tr>
+        <tr><td>Best Charter Months</td><td><strong>December–April</strong> for perfect trade winds and settled weather. November and May–June offer the same winds with fewer boats and lower prices. Avoid August–October.</td></tr>
+        <tr><td>Dress Code</td><td>Casual throughout. Swimwear is standard attire at beach bars. Cover up when entering shops or government buildings in Road Town.</td></tr>
+        <tr><td>Marine Environment</td><td>BVI is a protected marine sanctuary. No fishing in National Park areas. No taking of coral, shells or marine life. Use BVI-approved biodegradable sunscreen (reef-safe) — standard chemical sunscreen is banned.</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-content reveal">
+      <p class="cta-eyebrow">Ready to Sail the BVI?</p>
+      <h2 class="cta-title">Your BVI Charter<br>Starts Here</h2>
+      <p class="cta-sub">Let Skipper match you with the perfect vessel and itinerary for your BVI adventure. Expert planning, zero stress.</p>
+      <div class="cta-btns">
+        <a href="../../" class="btn-primary">Browse BVI Charters</a>
+        <a href="../../" class="btn-outline">Download BVI Guide</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo-wrap">
+          <div class="footer-brand-logo-crop"></div>
+        </div>
+        <p class="footer-tagline">Planning extraordinary boating vacations and waterfront experiences for sailors worldwide.</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Explore</p>
+        <ul>
+          <li><a href="#">Destinations</a></li>
+          <li><a href="#">Sailing Routes</a></li>
+          <li><a href="#">Experiences</a></li>
+          <li><a href="#">Inspiration</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Charter</p>
+        <ul>
+          <li><a href="#">Motor Yachts</a></li>
+          <li><a href="#">Sailing Yachts</a></li>
+          <li><a href="#">Catamarans</a></li>
+          <li><a href="#">Crewed Charters</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">BVI Links</p>
+        <ul>
+          <li><a href="#">BVI Tourism Board</a></li>
+          <li><a href="#">BVI Customs (eSeaClear)</a></li>
+          <li><a href="#">National Parks Trust</a></li>
+          <li><a href="#">VISAR Emergency</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 Skipper.com — All rights reserved</p>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => io.observe(el));
+
+    // Canvas-based logo extraction (same as homepage)
+    (function extractBrandLogo() {
+      const SRC_X = 1190, SRC_Y = 90, SRC_W = 650, SRC_H = 460;
+      const DST_W = 170, DST_H = 110;
+      const canvas = document.createElement('canvas');
+      canvas.width = DST_W; canvas.height = DST_H;
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      img.onload = function() {
+        ctx.drawImage(img, SRC_X, SRC_Y, SRC_W, SRC_H, 0, 0, DST_W, DST_H);
+        const id = ctx.getImageData(0, 0, DST_W, DST_H);
+        const d = id.data;
+        for (let i = 0; i < d.length; i += 4) {
+          const lum = (d[i] * 0.299 + d[i+1] * 0.587 + d[i+2] * 0.114) / 255;
+          const t = lum < 0.3 ? 0 : lum > 0.65 ? 255 : Math.round(((lum - 0.3) / 0.35) * 255);
+          d[i] = d[i+1] = d[i+2] = 255;
+          d[i+3] = t;
+        }
+        ctx.putImageData(id, 0, 0);
+        const dataUrl = canvas.toDataURL('image/png');
+        document.querySelectorAll('.brand-logo-crop, .footer-brand-logo-crop').forEach(function(el) {
+          const logoImg = document.createElement('img');
+          logoImg.src = dataUrl;
+          logoImg.alt = 'Skipper';
+          el.appendChild(logoImg);
+        });
+      };
+      img.src = '../../brand_assets/Gemini_Generated_Image_5z9ufl5z9ufl5z9u.png';
+    })();
+  </script>
+</body>
+</html>
